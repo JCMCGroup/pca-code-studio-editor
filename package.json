@@ -1,0 +1,56 @@
+{
+  "name": "scratch-editor",
+  "version": "15.1.1",
+  "private": "true",
+  "description": "Scratch editor mono-repository",
+  "keywords": [],
+  "homepage": "https://github.com/scratchfoundation/scratch-editor#readme",
+  "bugs": {
+    "url": "https://github.com/scratchfoundation/scratch-editor/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scratchfoundation/scratch-editor.git"
+  },
+  "license": "AGPL-3.0-only",
+  "author": "Scratch Foundation",
+  "workspaces": [
+    "packages/task-herder",
+    "packages/scratch-storage",
+    "packages/scratch-svg-renderer",
+    "packages/scratch-paint",
+    "packages/scratch-render",
+    "packages/scratch-vm",
+    "packages/scratch-gui",
+    "packages/scratch-media-lib-scripts"
+  ],
+  "scripts": {
+    "build": "cross-env NODE_ENV=production npm run --workspaces build",
+    "clean": "npm run --workspaces clean",
+    "prepare": "husky install",
+    "refresh-gh-workflow": "ts-node scripts/update-gha-workflows.ts",
+    "start": "npm --workspace @scratch/scratch-gui start",
+    "test": "npm test --workspaces",
+    "test:compat": "node --test --test-force-exit test/compat/compat.test.js",
+    "update-legal": "scripts/update-legal.sh",
+    "version": "cross-env-shell ./scripts/npm-version.sh"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "17.8.1",
+    "@commitlint/config-conventional": "17.8.1",
+    "@semantic-release/exec": "7.1.0",
+    "@semantic-release/git": "10.0.1",
+    "conventional-changelog-angular": "8.3.1",
+    "cross-env": "7.0.3",
+    "globals": "16.5.0",
+    "husky": "8.0.3",
+    "npm": "10.9.9",
+    "semantic-release": "25.0.9",
+    "ts-node": "10.9.2"
+  }
+}

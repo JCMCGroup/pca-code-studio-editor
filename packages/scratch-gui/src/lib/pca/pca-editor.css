@@ -1,0 +1,154 @@
+/* PCA patch: styles for what the PCA editor page adds around the GUI. */
+@import "../../css/units.css";
+@import "../../css/colors.css";
+
+.root {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.gui {
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+.banner {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+    background: #12386b;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.banner-button {
+    border: 2px solid #ffffff;
+    border-radius: 0.5rem;
+    background: transparent;
+    color: #ffffff;
+    padding: 0.2rem 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.toast {
+    font-weight: 400;
+}
+
+.pill {
+    position: fixed;
+    top: 0.55rem;
+    right: 4rem;
+    z-index: 1000;
+    border: 0;
+    border-radius: 1rem;
+    padding: 0.35rem 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    font-family: inherit;
+}
+
+.with-banner .pill {
+    top: calc(0.55rem + 2.6rem);
+}
+
+.pill:enabled {
+    cursor: pointer;
+}
+
+.pill-saved {
+    background: #e3f6ef;
+    color: #0b5c4a;
+}
+
+.pill-saving {
+    background: #fff4d6;
+    color: #6b4b00;
+}
+
+.pill-pending {
+    background: #ffffff;
+    color: #12386b;
+}
+
+.pill-error {
+    background: #ffe1e1;
+    color: #8a1c1c;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(18, 56, 107, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dialog {
+    width: min(32rem, calc(100% - 2rem));
+    background: #ffffff;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    color: #1f2a37;
+    outline: none;
+    font-size: 1rem;
+    line-height: 1.45;
+}
+
+.dialog-title {
+    margin: 0 0 0.75rem;
+    font-size: 1.4rem;
+}
+
+.dialog-body p {
+    margin: 0 0 0.75rem;
+}
+
+.dialog-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.primary,
+.secondary {
+    border-radius: 0.6rem;
+    padding: 0.6rem 1.1rem;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.primary {
+    border: 2px solid #12386b;
+    background: #12386b;
+    color: #ffffff;
+}
+
+.secondary {
+    border: 2px solid #12386b;
+    background: #ffffff;
+    color: #12386b;
+}
+
+.small {
+    font-size: 0.85rem;
+    color: #5a6878;
+}
+
+.library-notice {
+    padding: 3rem 2rem;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #1f2a37;
+}
