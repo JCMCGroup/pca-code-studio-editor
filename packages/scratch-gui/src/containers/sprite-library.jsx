@@ -7,6 +7,7 @@ import intlShape from '../lib/intlShape.js';
 import {spriteShape} from '../lib/assets-prop-types.js';
 import VM from '@scratch/scratch-vm';
 import mergeDynamicAssets from '../lib/merge-dynamic-assets.js';
+import {pcaLibraryTags} from '../lib/pca/runtime';
 
 import spriteLibraryContent from '../lib/libraries/sprites.json';
 import randomizeSpritePosition from '../lib/randomize-sprite-position';
@@ -56,7 +57,7 @@ class SpriteLibrary extends React.PureComponent {
                 data={data}
                 id="spriteLibrary"
                 storage={this.props.storage}
-                tags={spriteTags}
+                tags={pcaLibraryTags(spriteTags, data)}
                 title={this.props.intl.formatMessage(messages.libraryTitle)}
                 onItemSelected={this.handleItemSelect}
                 onRequestClose={this.props.onRequestClose}

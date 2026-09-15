@@ -1,0 +1,66 @@
+[
+ {
+  "name": "Tiny Hills",
+  "assetId": "8a946894daf37d6df3f838ac534b786c",
+  "md5ext": "8a946894daf37d6df3f838ac534b786c.png",
+  "dataFormat": "png",
+  "bitmapResolution": 2,
+  "rotationCenterX": 480,
+  "rotationCenterY": 360,
+  "tags": [
+   "platformer",
+   "pixel art",
+   "hills",
+   "outdoors"
+  ],
+  "isPublic": true
+ },
+ {
+  "name": "Grassland",
+  "assetId": "01e9a2a4fb3c1eb3f6a3e506f969319a",
+  "md5ext": "01e9a2a4fb3c1eb3f6a3e506f969319a.png",
+  "dataFormat": "png",
+  "bitmapResolution": 2,
+  "rotationCenterX": 480,
+  "rotationCenterY": 360,
+  "tags": [
+   "platformer",
+   "pixel art",
+   "grassland",
+   "outdoors"
+  ],
+  "isPublic": true
+ },
+ {
+  "name": "Grassland Sky",
+  "assetId": "f0a93a7944e123ec3fecd8b3caf50ab7",
+  "md5ext": "f0a93a7944e123ec3fecd8b3caf50ab7.png",
+  "dataFormat": "png",
+  "bitmapResolution": 2,
+  "rotationCenterX": 480,
+  "rotationCenterY": 360,
+  "tags": [
+   "platformer",
+   "pixel art",
+   "grassland",
+   "outdoors"
+  ],
+  "isPublic": true
+ },
+ {
+  "name": "Grassland Level",
+  "assetId": "ba55af6365c9aedf306809af4dc05a55",
+  "md5ext": "ba55af6365c9aedf306809af4dc05a55.png",
+  "dataFormat": "png",
+  "bitmapResolution": 2,
+  "rotationCenterX": 480,
+  "rotationCenterY": 360,
+  "tags": [
+   "platformer",
+   "pixel art",
+   "grassland",
+   "outdoors"
+  ],
+  "isPublic": true
+ }
+]

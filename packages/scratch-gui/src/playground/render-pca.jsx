@@ -5,6 +5,7 @@ import PcaEditorHOC from '../lib/pca/pca-editor-hoc.jsx';
 import {PcaStorage} from '../lib/pca/pca-storage';
 import {setColorMode} from '../reducers/settings';
 import {detectColorMode} from '../lib/settings/color-mode/persistence';
+import pcaLibraryPacks from '../lib/pca/library-packs';
 
 /**
  * @param {HTMLElement} appTarget the element to render into.
@@ -46,6 +47,8 @@ export default (appTarget, config) => {
         showComingSoon: false,
         backpackVisible: false,
         hideTutorialProjects: true,
+        // Our art packs, merged into the sprite, costume and backdrop libraries.
+        dynamicAssets: pcaLibraryPacks,
         isPlayerOnly,
         // PcaEditorHOC debounces autosave to 30 seconds after the last change;
         // upstream's own timer (from the first change) is pushed out of the way.

@@ -7,6 +7,7 @@ import intlShape from '../lib/intlShape.js';
 import {costumeShape} from '../lib/assets-prop-types.js';
 import VM from '@scratch/scratch-vm';
 import mergeDynamicAssets from '../lib/merge-dynamic-assets.js';
+import {pcaLibraryTags} from '../lib/pca/runtime';
 
 import backdropLibraryContent from '../lib/libraries/backdrops.json';
 import backdropTags from '../lib/libraries/backdrop-tags';
@@ -60,7 +61,7 @@ class BackdropLibrary extends React.Component {
                 data={mergedAssets}
                 id="backdropLibrary"
                 storage={this.props.storage}
-                tags={backdropTags}
+                tags={pcaLibraryTags(backdropTags, mergedAssets)}
                 title={this.props.intl.formatMessage(messages.libraryTitle)}
                 onItemSelected={this.handleItemSelect}
                 onRequestClose={this.props.onRequestClose}

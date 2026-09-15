@@ -7,6 +7,7 @@ import intlShape from '../lib/intlShape.js';
 import {costumeShape} from '../lib/assets-prop-types.js';
 import VM from '@scratch/scratch-vm';
 import mergeDynamicAssets from '../lib/merge-dynamic-assets.js';
+import {pcaLibraryTags} from '../lib/pca/runtime';
 
 import costumeLibraryContent from '../lib/libraries/costumes.json';
 import spriteTags from '../lib/libraries/sprite-tags';
@@ -58,7 +59,7 @@ class CostumeLibrary extends React.PureComponent {
                 data={data}
                 id="costumeLibrary"
                 storage={this.props.storage}
-                tags={spriteTags}
+                tags={pcaLibraryTags(spriteTags, data)}
                 title={this.props.intl.formatMessage(messages.libraryTitle)}
                 onItemSelected={this.handleItemSelected}
                 onRequestClose={this.props.onRequestClose}

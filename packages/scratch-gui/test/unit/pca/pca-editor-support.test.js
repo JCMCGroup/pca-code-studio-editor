@@ -6,11 +6,16 @@
 import mergeDynamicAssets from '../../../src/lib/merge-dynamic-assets';
 import spriteLibraryContent from '../../../src/lib/libraries/sprites.json';
 import costumeLibraryContent from '../../../src/lib/libraries/costumes.json';
+import backdropLibraryContent from '../../../src/lib/libraries/backdrops.json';
+import backdropTags from '../../../src/lib/libraries/backdrop-tags';
+import spriteTags from '../../../src/lib/libraries/sprite-tags';
+import pcaLibraryPacks, {pcaLibraryPackCredits} from '../../../src/lib/pca/library-packs';
 import {
     getPcaRuntime,
     pcaFilterExtensions,
     pcaFilterLibrary,
     pcaLibraryEnabled,
+    pcaLibraryTags,
     pcaSoundRecordingEnabled,
     setPcaRuntime
 } from '../../../src/lib/pca/runtime';
@@ -244,5 +249,65 @@ describe('PCA import from the computer', () => {
         storage.importing = true;
         await expect(storage.saveProject('current-project', '{}', {})).rejects.toThrow();
         expect(global.fetch).not.toHaveBeenCalled();
+    });
+});
+
+describe('PCA art packs in the library', () => {
+    afterEach(() => setPcaRuntime(null));
+
+    const kinds = [
+        ['sprites', spriteLibraryContent],
+        ['costumes', costumeLibraryContent],
+        ['backdrops', backdropLibraryContent]
+    ];
+    const pictures = entry => (entry.costumes ? entry.costumes : [entry]);
+
+    test('every entry is a public picture from a credited pack, with a pack tag', () => {
+        expect(pcaLibraryPackCredits.map(pack => pack.licence)).toEqual(['CC0-1.0', 'CC0-1.0', 'CC0-1.0', 'CC0-1.0']);
+        expect(pcaLibraryPacks.sounds).toEqual([]);
+        for (const [kind] of kinds) {
+            expect(pcaLibraryPacks[kind].length).toBeGreaterThan(0);
+            for (const entry of pcaLibraryPacks[kind]) {
+                expect(entry.isPublic).toBe(true);
+                expect(entry.tags.some(tag => tag === 'platformer' || tag === 'halloween')).toBe(true);
+                for (const costume of pictures(entry)) {
+                    expect(costume.md5ext).toBe(`${costume.assetId}.png`);
+                    expect(costume.assetId).toMatch(/^[0-9a-f]{32}$/);
+                    expect(costume.dataFormat).toBe('png');
+                    expect(costume.bitmapResolution).toBe(2);
+                }
+            }
+        }
+    });
+
+    test('no pack entry shares a name with another entry or with the Scratch library', () => {
+        // mergeDynamicAssets keeps the bundled entry when names match, so a
+        // clash would silently hide ours.
+        for (const [kind, bundled] of kinds) {
+            const names = pcaLibraryPacks[kind].map(entry => entry.name.toLowerCase());
+            expect(new Set(names).size).toBe(names.length);
+            const taken = new Set(bundled.map(entry => entry.name.toLowerCase()));
+            expect(names.filter(name => taken.has(name))).toEqual([]);
+        }
+    });
+
+    test('pack entries are listed on a PCA page, not as member-only, with their tag buttons', () => {
+        setPcaRuntime({features: {library: {source: 'local'}}});
+        const sprites = mergeDynamicAssets(spriteLibraryContent, pcaLibraryPacks.sprites).data;
+        expect(sprites).toHaveLength(spriteLibraryContent.length - 10 + pcaLibraryPacks.sprites.length);
+        const crypt = sprites.find(sprite => sprite.name === 'Halloween Crypt');
+        expect(crypt.isMemberOnly).toBeUndefined();
+        expect(crypt.tags).not.toContain('membership');
+
+        const spriteButtons = pcaLibraryTags(spriteTags, sprites).map(button => button.tag);
+        expect(spriteButtons.slice(-2)).toEqual(['platformer', 'halloween']);
+        expect(pcaLibraryTags(spriteTags, sprites)).toBe(pcaLibraryTags(spriteTags, sprites));
+        const backdrops = mergeDynamicAssets(backdropLibraryContent, pcaLibraryPacks.backdrops).data;
+        // Some of Scratch's own backdrops are tagged halloween too, so both buttons show.
+        expect(pcaLibraryTags(backdropTags, backdrops).map(button => button.tag)).toContain('platformer');
+        expect(pcaLibraryTags(backdropTags, [{name: 'Room', tags: ['indoors']}])).toBe(backdropTags);
+
+        setPcaRuntime(null);
+        expect(pcaLibraryTags(spriteTags, sprites)).toBe(spriteTags);
     });
 });

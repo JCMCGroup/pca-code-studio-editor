@@ -77,6 +77,43 @@ export const pcaFilterLibrary = items => {
     return items.filter(item => !TRADEMARKED_NAME.test(item.name || ''));
 };
 
+// Tag buttons for the art packs (library-packs/): every pack entry carries one.
+const PCA_LIBRARY_TAGS = [
+    {
+        tag: 'platformer',
+        intlLabel: {
+            defaultMessage: 'Platformer',
+            description: 'Tag for filtering a library for platformer game art',
+            id: 'pca.libraryTags.platformer'
+        }
+    },
+    {
+        tag: 'halloween',
+        intlLabel: {
+            defaultMessage: 'Halloween',
+            description: 'Tag for filtering a library for Halloween art',
+            id: 'pca.libraryTags.halloween'
+        }
+    }
+];
+const taggedLists = new WeakMap();
+
+/**
+ * @param {Array.<object>} tags a library's tag buttons.
+ * @param {Array.<object>} data the entries the library lists.
+ * @returns {Array.<object>} on a PCA page, the same buttons followed by each
+ *   art pack tag that some entry carries (the same array again for the same
+ *   entries); unchanged outside a PCA build.
+ */
+export const pcaLibraryTags = (tags, data) => {
+    if (!runtime) return tags;
+    if (!taggedLists.has(data)) {
+        const extra = PCA_LIBRARY_TAGS.filter(({tag}) => data.some(item => (item.tags || []).includes(tag)));
+        taggedLists.set(data, extra.length ? tags.concat(extra) : tags);
+    }
+    return taggedLists.get(data);
+};
+
 /**
  * @param {Array.<object>} extensions the extension library entries.
  * @returns {Array.<object>} the entries this page may offer: in a PCA build

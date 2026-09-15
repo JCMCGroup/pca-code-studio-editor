@@ -28,6 +28,7 @@ import {
     projectError,
     saveProjectAsCopy
 } from '../../reducers/project-state';
+import {pcaLibraryPackCredits} from './library-packs';
 import {getPcaRuntime, setPcaHooks} from './runtime';
 import {deleteRecovery, expireRecovery, readRecovery, writeRecovery} from './recovery';
 
@@ -49,6 +50,19 @@ const noop = () => {};
 const formatTime = timestamp => new Date(timestamp).toLocaleString('en-GB', {
     weekday: 'long', hour: '2-digit', minute: '2-digit'
 });
+
+const LICENCE_NAMES = {
+    'CC0-1.0': 'CC0 1.0',
+    'CC-BY-4.0': 'CC BY 4.0'
+};
+
+// The art pack credits in the About dialog. A pack without a licence file of its
+// own is credited under both licences its page names. Addresses are shown as
+// text, not links, so the dialog does not send children off the site.
+const creditLicence = pack => {
+    const licence = LICENCE_NAMES[pack.licence] || pack.licence;
+    return pack.licenceFile || !pack.licenceNote ? licence : `${licence} or ${LICENCE_NAMES['CC-BY-4.0']}`;
+};
 
 const Dialog = ({title, children, actions, onClose}) => (
     <ReactModal
@@ -454,6 +468,15 @@ const PcaEditorHOC = function (WrappedComponent) {
                                 </a>
                             </p>
                         ) : null}
+                        <p>Some pictures in the library come from these free art packs:</p>
+                        <ul className={styles.credits}>
+                            {pcaLibraryPackCredits.map(pack => (
+                                <li key={pack.title}>
+                                    {pack.title} by {pack.author}, {creditLicence(pack)}.{' '}
+                                    <span className={styles.small}>{pack.url.replace(/^https?:\/\//, '')}</span>
+                                </li>
+                            ))}
+                        </ul>
                         <p className={styles.small}>
                             Build {about.buildId} ({about.upstreamVersion})
                         </p>

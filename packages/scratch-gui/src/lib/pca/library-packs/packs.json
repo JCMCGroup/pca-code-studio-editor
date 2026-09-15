@@ -1,0 +1,47 @@
+[
+ {
+  "title": "Tiny Platformer – Hills",
+  "author": "LuizMelo",
+  "url": "https://luizmelo.itch.io/tiny-platformer-hills-asset-pack",
+  "licence": "CC0-1.0",
+  "licenceFile": "License.txt",
+  "zip": "Tiny Platformer - Hills Asset Pack.zip",
+  "sprites": 6,
+  "costumeLibraryEntries": 50,
+  "backdrops": 1
+ },
+ {
+  "title": "Four Seasons Platformer Sprites",
+  "author": "Kevin's Mom's House",
+  "url": "https://kevins-moms-house.itch.io/four-seasons-platformer-sprites",
+  "licence": "CC0-1.0",
+  "licenceFile": null,
+  "licenceNote": "The zip has no licence file; the itch.io page says CC0 (its licence link shows CC-BY-4.0), so the pack is credited here either way.",
+  "zip": "Four_Seasons_Platformer_Sprites.zip",
+  "sprites": 18,
+  "costumeLibraryEntries": 18,
+  "backdrops": 0
+ },
+ {
+  "title": "Multi Platformer Tileset (free, Grassland)",
+  "author": "Shackhal",
+  "url": "https://shackhal.itch.io/multi-platformer-tileset",
+  "licence": "CC0-1.0",
+  "licenceFile": "ReadMe.txt",
+  "zip": "Multi_Platformer_Tileset_Free.zip",
+  "sprites": 10,
+  "costumeLibraryEntries": 158,
+  "backdrops": 3
+ },
+ {
+  "title": "KayKit Halloween Bits 1.0",
+  "author": "Kay Lousberg",
+  "url": "https://kaylousberg.itch.io/halloween-bits",
+  "licence": "CC0-1.0",
+  "licenceFile": "License.txt",
+  "zip": "KayKit_HalloweenBits_1.0_FREE.zip",
+  "sprites": 63,
+  "costumeLibraryEntries": 63,
+  "backdrops": 0
+ }
+]
